@@ -105,6 +105,46 @@
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
     var newArray = [];
+    var iteratedArray = [];
+
+    // for (var i = 0; i < array.length; i++) {
+    //   var exists = false;
+    //   for (var j = 0; j < newArray.length; j++) {
+    //     console.log(iterator);
+    //     if (iterator) {
+    //       var iterated = iterator(array[i]);
+    //       var pushIterated = iterator(newArray[j]);
+    //       if (iterated === pushIterated) {
+    //         exists = true;
+    //       }
+    //     } else if (array[i] === newArray[j]) {
+    //       exists = true;
+
+    //     }
+    //   }
+
+    //   console.log(exists);
+    //   if (!exists) {
+    //     newArray.push(array[i]);
+    //     console.log(newArray);
+    //   }
+    //   }
+    //     return newArray;
+    // };
+
+
+    _.each(array, function(item, index) {
+      if (iterator) {
+        var iterated = iterator(item);
+        if (_.indexOf(iteratedArray, iterated) === -1) {
+          iteratedArray.push(iterated);
+          newArray.push(item);
+        }
+      } else if (_.indexOf(newArray, item) === -1) {
+        newArray.push(item);
+      }
+    });
+
 
     return newArray;
   };
